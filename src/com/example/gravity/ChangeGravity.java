@@ -3,7 +3,9 @@ package com.example.gravity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.ToggleButton;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class ChangeGravity extends Activity {
@@ -66,7 +68,19 @@ public class ChangeGravity extends Activity {
 			}
 		});
 		
-		
+		ToggleButton wrap = (ToggleButton) findViewById(R.id.wrapButton);
+		wrap.setChecked(MainActivity.wrap);
+		wrap.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked)
+					MainActivity.wrap = true;
+				 else
+					MainActivity.wrap = false;
+				
+			}
+		});
 	}
 
 	@Override

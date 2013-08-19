@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 	public static int partCount = 40000;
 	public static float delta = 0.96f;
 	public static float acc = 100.f;
-	
+	public static boolean wrap = false;
 	static MainActivity instance;
 	
 	private GravityView mView;
@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public static void notifyGravityChanged(){
-		instance.mView.mRender.setGravity(delta, acc);
+		instance.mView.mRender.setGravity(delta, acc, wrap);
 	}
 
 	@Override

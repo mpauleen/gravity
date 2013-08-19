@@ -10,7 +10,7 @@ static int initialized = 0;
 float gTouchX = 50.f;
 float gTouchY = 50.f;
 
-
+bool wrap = false;
 float redRS = 0.5f;
 float greenRS = 0.9f;
 float blueRS = 0.9f;
@@ -64,6 +64,9 @@ int root() {
     int size = rsAllocationGetDimX(rsGetAllocation(point));
     Point_t *p = point;
 
+// If wrap true
+	
+	if(wrap) {
     for (int i = 0; i < size; i++) {
 	    if (gTouchX != -1)
 	    {
@@ -87,15 +90,44 @@ int root() {
 		uchar4 c = rsPackColorTo8888(redRS, greenRS, blueRS);
 		p->color = c;
 
-//        if (p->position.x > width)
-//        	p->position.x = 0;
-//        else if (p->position.x < 0)
-//        	p->position.x = width;
-//
-//        if (p->position.y > height)
-//        	p->position.y = 0;
-//        else if (p->position.y < 0)
-//        	p->position.y = height;
+        if (p->position.x > width)
+        	p->position.x = 0;
+        else if (p->position.x < 0)
+        	p->position.x = width;
+
+        if (p->position.y > height)
+        	p->position.y = 0;
+        else if (p->position.y < 0)
+        	p->position.y = height;
+        	p++;
+ 	}
+ }
+ // If no wrap
+ else {
+    for (int i = 0; i < size; i++) {
+	    if (gTouchX != -1)
+	    {
+	        float diff_x = gTouchX - p->position.x;
+	        float diff_y = gTouchY - p->position.y;
+	        float acc = acceleration/(diff_x * diff_x + diff_y * diff_y);
+	        float acc_x = acc * diff_x;
+	        float acc_y = acc * diff_y;
+	        
+	        p->delta.x += acc_x;
+	        p->delta.y += acc_y;
+	
+			// This is friction
+	        p->delta.x *= delta;
+	        p->delta.y *= delta;
+		}
+		
+		p->position.x += p->delta.x;
+		p->position.y += p->delta.y;
+		
+		uchar4 c = rsPackColorTo8888(redRS, greenRS, blueRS);
+		p->color = c;
+
+
 
 //		Bounce
 		if (p->position.x > width) {
@@ -112,7 +144,7 @@ int root() {
 	    p++;
 	   
     }    
-	
+}
     rsgDrawMesh(partMesh);
     
     return 1;

@@ -61,11 +61,17 @@ public class GravityRS {
         System.out.println("Set Color");
     }
     
-    public void setGravity (float delta, float acc) {
+    public void setGravity (float delta, float acc, boolean wrapped) {
     	mScript.set_acceleration(acc);
     	mScript.set_delta(delta);
+    	mScript.set_wrap(wrapped);
     	System.out.println(mScript.get_delta());
     	System.out.println(mScript.get_acceleration());
+    	System.out.println(wrapped);
+    }
+    
+    public void setWrap (boolean wrap) {
+    	mScript.set_wrap(wrap);
     }
 
     public void newTouchPosition(float x, float y, float pressure, int id) {

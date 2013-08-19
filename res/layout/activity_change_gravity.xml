@@ -40,4 +40,23 @@
         android:layout_alignLeft="@+id/deltaBar"
         android:layout_below="@+id/deltaBar" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/accBar"
+        android:layout_marginTop="15dp"
+        android:text="Wrapping"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ToggleButton
+        android:id="@+id/wrapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:text="ToggleButton" />
+
 </RelativeLayout>
