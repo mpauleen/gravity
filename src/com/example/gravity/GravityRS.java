@@ -9,8 +9,11 @@ import android.renderscript.RenderScriptGL;
 public class GravityRS {
     public static int PART_COUNT = 40000; // Count of particles
 
-    public GravityRS() {
+    public GravityRS(int partCount) {
+    	PART_COUNT = partCount;
     }
+    
+
 
     private Resources mRes;
 	private RenderScriptGL mRS;

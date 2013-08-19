@@ -12,10 +12,10 @@ import android.view.MotionEvent;
 public class GravityView extends RSSurfaceView {
 
 	int touchTracker = 0;
-	
-    public GravityView(Context context) {
+	int particleCount;
+    public GravityView(Context context, int particleCount) {
         super(context);
-        
+        this.particleCount = particleCount;
         touchTracker = 0;
         
         Thread t = new Thread(new Runnable() {
@@ -48,7 +48,7 @@ public class GravityView extends RSSurfaceView {
             mRS = createRenderScriptGL(sc);
             mRS.setSurface(holder, w, h);
 
-            mRender = new GravityRS();
+            mRender = new GravityRS(particleCount);
             mRender.init(mRS, getResources(), w, h);
         }
     }

@@ -21,14 +21,23 @@ public class MainActivity extends Activity {
 	public static int b = 230;
 	public static int partCount = 40000;
 	
+	static MainActivity instance;
+	
 	private GravityView mView;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		mView = new GravityView(this);
+		mView = new GravityView(this, partCount);
 		setContentView(mView);
+		
+		instance = this;
+	}
+	
+	public static void notifyPartCountChanged() {
+		instance.mView = new GravityView(instance, partCount);
+		instance.setContentView(instance.mView);
 	}
 
 	@Override
@@ -59,9 +68,12 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = new Intent(this, ColorChooserDialog.class);
+		Intent intent = new Intent(this, Settings.class);
 		startActivityForResult(intent, 1);
+		
+		
 		return super.onOptionsItemSelected(item);
+		
 
 	}
 	

@@ -29,7 +29,12 @@
         </activity>
         <activity
             android:name="com.example.gravity.Settings"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.example.gravity.ParticleNumberSetter"
+            android:label="@string/title_activity_particle_number_setter" >
         </activity>
     </application>
 
