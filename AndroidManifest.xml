@@ -39,7 +39,8 @@
         </activity>
         <activity
             android:name="com.example.gravity.ChangeGravity"
-            android:label="@string/title_activity_change_gravity" >
+            android:label="@string/title_activity_change_gravity"
+            android:theme="@android:style/Theme.Dialog"  >
         </activity>
     </application>
 

@@ -12,6 +12,7 @@ public class ParticleNumberSetter extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Set Number of Particles");
 		setContentView(R.layout.activity_particle_number_setter);
 		
 		SeekBar partCount = (SeekBar) findViewById(R.id.particleNum);
@@ -26,7 +27,7 @@ public class ParticleNumberSetter extends Activity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				progress = seekBar.getProgress();
+				progress = (seekBar.getProgress()+1);
 				
 			}
 			
@@ -41,7 +42,7 @@ public class ParticleNumberSetter extends Activity {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				TextView text = (TextView) findViewById(R.id.partNum);
-				text.setText(""+seekBar.getProgress());
+				text.setText(""+seekBar.getProgress()+1);
 				
 			}
 		});

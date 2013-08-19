@@ -15,7 +15,9 @@ public class ChangeGravity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
+		setTitle("Set Gravity");
 		setContentView(R.layout.activity_change_gravity);
 		
 		SeekBar acceleration = (SeekBar) findViewById(R.id.accBar);

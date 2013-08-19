@@ -54,11 +54,21 @@
 
     <com.example.gravity.MySurfaceView
         android:id="@+id/mySurfaceView1"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/blueBar"
+        android:layout_marginRight="19dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/blueBar" />
+        android:layout_below="@+id/mySurfaceView1" />
 
 </RelativeLayout>

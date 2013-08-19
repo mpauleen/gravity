@@ -20,6 +20,7 @@ public class ColorChooserDialog extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Pick Color");
 		setContentView(R.layout.colorchooser);
 		
 		
@@ -39,16 +40,13 @@ public class ColorChooserDialog extends Activity {
 		red.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				r = seekBar.getProgress();
 				Toast.makeText(getApplicationContext(),
 						"red bar progress:" + r, Toast.LENGTH_SHORT).show();
-				s.setColors(r, g, b);
-				s.postInvalidate();
-				s.draw(new Canvas());
-				
-				MainActivity.r = r;
-				MainActivity.g = g;
-				MainActivity.b = b;
+
+//				
+//				MainActivity.r = r;
+//				MainActivity.g = g;
+//				MainActivity.b = b;
 			}
 
 			@Override
@@ -59,7 +57,11 @@ public class ColorChooserDialog extends Activity {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-			}
+				r = seekBar.getProgress();
+				s.setColors(r, g, b);
+				s.postInvalidate();
+				s.draw(new Canvas());
+				}
 		});
 
 		SeekBar green = (SeekBar) findViewById(R.id.greenBar);
@@ -68,16 +70,13 @@ public class ColorChooserDialog extends Activity {
 		green.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				g = seekBar.getProgress();
 				Toast.makeText(getApplicationContext(),
 						"green bar progress:" + g, Toast.LENGTH_SHORT).show();
-				s.setColors(r, g, b);
-				s.postInvalidate();
-				s.draw(new Canvas());
-				
-				MainActivity.r = r;
-				MainActivity.g = g;
-				MainActivity.b = b;
+
+//				
+//				MainActivity.r = r;
+//				MainActivity.g = g;
+//				MainActivity.b = b;
 
 			}
 
@@ -90,7 +89,10 @@ public class ColorChooserDialog extends Activity {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-
+				g = seekBar.getProgress();
+				s.setColors(r, g, b);
+				s.postInvalidate();
+				s.draw(new Canvas());
 			}
 		});
 
@@ -100,16 +102,13 @@ public class ColorChooserDialog extends Activity {
 		blue.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				b = seekBar.getProgress();
 				Toast.makeText(getApplicationContext(),
 						"blue bar progress:" + b, Toast.LENGTH_SHORT).show();
-				s.setColors(r, g, b);
-				s.postInvalidate();
-				s.draw(new Canvas());
-				
-				MainActivity.r = r;
-				MainActivity.g = g;
-				MainActivity.b = b;
+
+//				
+//				MainActivity.r = r;
+//				MainActivity.g = g;
+//				MainActivity.b = b;
 			}
 
 			@Override
@@ -121,7 +120,10 @@ public class ColorChooserDialog extends Activity {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-
+				b = seekBar.getProgress();
+				s.setColors(r, g, b);
+				s.postInvalidate();
+				s.draw(new Canvas());
 			}
 		});
 
@@ -138,13 +140,14 @@ public class ColorChooserDialog extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		intent.putExtra("r", r);
-		System.out.println(r);
-		intent.putExtra("g", g);
-		System.out.println(g);
-		intent.putExtra("b", b);
-		System.out.println(b);
-		setResult(RESULT_OK, intent);
+		final MySurfaceView s = (MySurfaceView) findViewById(R.id.mySurfaceView1);
+		s.setColors(r, g, b);
+		s.postInvalidate();
+		s.draw(new Canvas());
+
+		MainActivity.r = r;
+		MainActivity.g = g;
+		MainActivity.b = b;
 		finish();
 	}
 
