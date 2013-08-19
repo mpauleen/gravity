@@ -15,6 +15,10 @@ float redRS = 0.5f;
 float greenRS = 0.9f;
 float blueRS = 0.9f;
 
+float delta = 0.96f;
+
+float acceleration = 100.f;
+
 typedef struct __attribute__((packed, aligned(4))) Point {
     float2 delta;
     float2 position;
@@ -65,7 +69,7 @@ int root() {
 	    {
 	        float diff_x = gTouchX - p->position.x;
 	        float diff_y = gTouchY - p->position.y;
-	        float acc = 100.f/(diff_x * diff_x + diff_y * diff_y);
+	        float acc = acceleration/(diff_x * diff_x + diff_y * diff_y);
 	        float acc_x = acc * diff_x;
 	        float acc_y = acc * diff_y;
 	        
@@ -73,8 +77,8 @@ int root() {
 	        p->delta.y += acc_y;
 	
 			// This is friction
-	        p->delta.x *= 0.96;
-	        p->delta.y *= 0.96;
+	        p->delta.x *= delta;
+	        p->delta.y *= delta;
 		}
 		
 		p->position.x += p->delta.x;

@@ -60,6 +60,13 @@ public class GravityRS {
         mScript.set_blueRS(blue);
         System.out.println("Set Color");
     }
+    
+    public void setGravity (float delta, float acc) {
+    	mScript.set_acceleration(acc);
+    	mScript.set_delta(delta);
+    	System.out.println(mScript.get_delta());
+    	System.out.println(mScript.get_acceleration());
+    }
 
     public void newTouchPosition(float x, float y, float pressure, int id) {
         mScript.set_gTouchX(x);

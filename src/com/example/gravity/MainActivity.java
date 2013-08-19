@@ -20,6 +20,8 @@ public class MainActivity extends Activity {
 	public static int g = 230;
 	public static int b = 230;
 	public static int partCount = 40000;
+	public static float delta = 0.96f;
+	public static float acc = 100.f;
 	
 	static MainActivity instance;
 	
@@ -38,6 +40,10 @@ public class MainActivity extends Activity {
 	public static void notifyPartCountChanged() {
 		instance.mView = new GravityView(instance, partCount);
 		instance.setContentView(instance.mView);
+	}
+	
+	public static void notifyGravityChanged(){
+		instance.mView.mRender.setGravity(delta, acc);
 	}
 
 	@Override

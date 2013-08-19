@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 public class Settings extends ListActivity {
 
-	static final String[] FRUITS = new String[] { "Pick Color", "Set Number of Particles"};
+	static final String[] FRUITS = new String[] { "Pick Color", "Set Number of Particles", "Set Gravity"};
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,10 @@ public void onCreate(Bundle savedInstanceState) {
 		   }
 		   else if(position == 1){
 			   Intent intent = new Intent(getApplicationContext(), ParticleNumberSetter.class);
+			   startActivity(intent);
+		   }
+		   else if(position == 2){
+			   Intent intent = new Intent(getApplicationContext(), ChangeGravity.class);
 			   startActivity(intent);
 		   }
 		}

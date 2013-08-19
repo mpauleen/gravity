@@ -19,6 +19,8 @@ public class ParticleNumberSetter extends Activity {
 		partCount.setMax(100000);
 		partCount.setProgress(MainActivity.partCount);
 		progress = 40000;
+		TextView text = (TextView) findViewById(R.id.partNum);
+		text.setText(""+MainActivity.partCount);
 		partCount.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override

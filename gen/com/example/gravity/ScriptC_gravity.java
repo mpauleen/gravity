@@ -44,6 +44,8 @@ public class ScriptC_gravity extends ScriptC {
         mExportVar_redRS = 0.5f;
         mExportVar_greenRS = 0.9f;
         mExportVar_blueRS = 0.9f;
+        mExportVar_delta = 0.96f;
+        mExportVar_acceleration = 100f;
     }
 
     private FieldPacker __rs_fp_F32;
@@ -103,7 +105,29 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_blueRS;
     }
 
-    private final static int mExportVarIdx_point = 5;
+    private final static int mExportVarIdx_delta = 5;
+    private float mExportVar_delta;
+    public synchronized void set_delta(float v) {
+        setVar(mExportVarIdx_delta, v);
+        mExportVar_delta = v;
+    }
+
+    public float get_delta() {
+        return mExportVar_delta;
+    }
+
+    private final static int mExportVarIdx_acceleration = 6;
+    private float mExportVar_acceleration;
+    public synchronized void set_acceleration(float v) {
+        setVar(mExportVarIdx_acceleration, v);
+        mExportVar_acceleration = v;
+    }
+
+    public float get_acceleration() {
+        return mExportVar_acceleration;
+    }
+
+    private final static int mExportVarIdx_point = 7;
     private ScriptField_Point mExportVar_point;
     public void bind_point(ScriptField_Point v) {
         mExportVar_point = v;
@@ -115,7 +139,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_point;
     }
 
-    private final static int mExportVarIdx_partMesh = 6;
+    private final static int mExportVarIdx_partMesh = 8;
     private Mesh mExportVar_partMesh;
     public synchronized void set_partMesh(Mesh v) {
         setVar(mExportVarIdx_partMesh, v);

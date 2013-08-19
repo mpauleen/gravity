@@ -7,5 +7,6 @@
     <string name="title_activity_color_chooser_dialog">ColorChooserDialog</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_particle_number_setter">ParticleNumberSetter</string>
+    <string name="title_activity_change_gravity">ChangeGravity</string>
 
 </resources>
