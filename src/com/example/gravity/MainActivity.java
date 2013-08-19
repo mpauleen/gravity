@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 	public static int r = 128;
 	public static int g = 230;
 	public static int b = 230;
+	public static int partCount = 40000;
 	
 	private GravityView mView;
 	/** Called when the activity is first created. */

@@ -7,7 +7,7 @@ import android.renderscript.RenderScriptGL;
 
 @SuppressWarnings("deprecation")
 public class GravityRS {
-    public static final int PART_COUNT = 40000; // Count of particles
+    public static int PART_COUNT = 40000; // Count of particles
 
     public GravityRS() {
     }
@@ -57,8 +57,6 @@ public class GravityRS {
         mScript.set_blueRS(blue);
         System.out.println("Set Color");
     }
-    
-    
 
     public void newTouchPosition(float x, float y, float pressure, int id) {
         mScript.set_gTouchX(x);
