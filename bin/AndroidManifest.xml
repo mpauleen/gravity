@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.gravity.ColorChooserDialog"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/title_activity_color_chooser_dialog" >
+        </activity>
     </application>
 
 </manifest>

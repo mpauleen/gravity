@@ -5,19 +5,22 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	float r = 0.5f;
-	float g = 0.9f;
-	float b = 0.9f;
+	public static int r = 128;
+	public static int g = 230;
+	public static int b = 230;
+	
 	private GravityView mView;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class MainActivity extends Activity {
 		// to take appropriate action when the activity looses focus
 		super.onResume();
 		mView.resume();
+		
 	}
 
 	@Override
@@ -54,108 +58,19 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
-		final Dialog dialog = new Dialog(this);
-		dialog.setContentView(R.layout.colorchooser);
-		dialog.setTitle("Color Picker");
-		
-		dialog.setOnDismissListener(new OnDismissListener() {
-			
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				mView.mRender.setColor(r, g, b );
-				
-			}
-		});
-
-		
-		
-		SeekBar red = (SeekBar) dialog.findViewById(R.id.redBar);
-		red.setProgress((int) (r*100));
-		red.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				r = (float) seekBar.getProgress() / 100;
-				Toast.makeText(getApplicationContext(),
-						"red bar progress:" + r, Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-			}
-		});
-			
-		
-		
-		SeekBar green = (SeekBar) dialog.findViewById(R.id.greenBar);
-		green.setProgress((int) (g*100));
-		green.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				g = (float) seekBar.getProgress() / 100;
-				Toast.makeText(getApplicationContext(),
-						"green bar progress:" + g, Toast.LENGTH_SHORT).show();
-
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-
-			}
-		});
-
-		
-		
-		SeekBar blue = (SeekBar) dialog.findViewById(R.id.blueBar);
-		blue.setProgress((int) (b*100));
-		blue.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				b = (float) seekBar.getProgress() / 100;
-				Toast.makeText(getApplicationContext(),
-						"blue bar progress:" + b, Toast.LENGTH_SHORT).show();
-
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-
-			}
-		});
-			
-		
-//		dialogButton.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				dialog.dismiss();
-//			}
-//		});
-
-		dialog.show();
-		
-		
-		
-		
+		Intent intent = new Intent(this, ColorChooserDialog.class);
+		startActivityForResult(intent, 1);
 		return super.onOptionsItemSelected(item);
+
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		System.out.println(requestCode);
+		if(requestCode == 1) {
+			mView.mRender.setColor(r, g, b);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

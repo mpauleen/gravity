@@ -52,4 +52,21 @@
         android:text="Red  "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <com.example.gravity.MySurfaceView
+        android:id="@+id/mySurfaceView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button1" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/blueBar"
+        android:text="Set" />
+
 </RelativeLayout>

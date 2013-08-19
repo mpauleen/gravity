@@ -45,10 +45,16 @@ public class GravityRS {
         mScript.invoke_initParticles(); // Initialize Particles
     }
     
-    public void setColor(float r, float g, float b) {
-        mScript.set_redRS(r);
-        mScript.set_greenRS(g);
-        mScript.set_blueRS(b);
+    public void setColor(int r, int g, int b) {
+    	float red = (float) r/255;
+    	float green = (float) g/255;
+    	float blue = (float) b/255;
+    	System.out.println(red);
+    	System.out.println(green);
+    	System.out.println(blue);
+        mScript.set_redRS(red);
+        mScript.set_greenRS(green);
+        mScript.set_blueRS(blue);
         System.out.println("Set Color");
     }
     
