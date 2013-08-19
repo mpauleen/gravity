@@ -34,7 +34,8 @@
         </activity>
         <activity
             android:name="com.example.gravity.ParticleNumberSetter"
-            android:label="@string/title_activity_particle_number_setter" >
+            android:label="@string/title_activity_particle_number_setter"
+             android:theme="@android:style/Theme.Dialog">
         </activity>
     </application>
 

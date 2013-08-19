@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class ParticleNumberSetter extends Activity {
 	public int progress = 0;
@@ -14,14 +15,17 @@ public class ParticleNumberSetter extends Activity {
 		setContentView(R.layout.activity_particle_number_setter);
 		
 		SeekBar partCount = (SeekBar) findViewById(R.id.particleNum);
+
 		partCount.setMax(100000);
 		partCount.setProgress(MainActivity.partCount);
+		progress = 40000;
 		partCount.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				progress = seekBar.getProgress();
+				
 			}
 			
 			@Override
@@ -34,6 +38,8 @@ public class ParticleNumberSetter extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
+				TextView text = (TextView) findViewById(R.id.partNum);
+				text.setText(""+seekBar.getProgress());
 				
 			}
 		});
