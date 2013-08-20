@@ -9,35 +9,36 @@ import android.widget.TextView;
 
 public class ParticleNumberSetter extends Activity {
 	public int progress = 0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("Set Number of Particles");
 		setContentView(R.layout.activity_particle_number_setter);
-		
+
 		SeekBar partCount = (SeekBar) findViewById(R.id.particleNum);
 
 		partCount.setMax(99999);
 		partCount.setProgress(MainActivity.partCount);
-		progress = 40000;
+		progress = partCount.getProgress();
 		TextView text = (TextView) findViewById(R.id.partNum);
-		text.setText(""+MainActivity.partCount);
+		text.setText("" + MainActivity.partCount);
 		partCount.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			
+
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				progress = seekBar.getProgress();
 				progress++;
-				
+
 			}
-			
+
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
@@ -45,11 +46,11 @@ public class ParticleNumberSetter extends Activity {
 				TextView text = (TextView) findViewById(R.id.partNum);
 				progress = seekBar.getProgress();
 				progress++;
-				text.setText(""+progress);
-				
+				text.setText("" + progress);
+
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -58,14 +59,22 @@ public class ParticleNumberSetter extends Activity {
 		getMenuInflater().inflate(R.menu.particle_number_setter, menu);
 		return true;
 	}
-	
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		MainActivity.partCount = progress;
-		MainActivity.notifyPartCountChanged();
+		System.out.println("progress"+progress);
+		if (MainActivity.partCount != progress) {
+			MainActivity.partCount = progress;
+			MainActivity.notifyPartCountChanged();
+		} else {
+			System.out.println("noChange");
+			MainActivity.partCount = progress;
+		}
+		System.out.println("Main Activity"+MainActivity.partCount);
+		System.out.println("progress"+progress);
+		
 	}
 
 }
