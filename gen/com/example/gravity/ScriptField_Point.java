@@ -16,7 +16,7 @@
 
 /*
  * This file is auto-generated. DO NOT MODIFY!
- * The source Renderscript file: C:\Users\i-mpauleen\Desktop\gravity\src\com\example\gravity\gravity.rs
+ * The source Renderscript file: C:\Users\Michael\git\gravity\src\com\example\gravity\gravity.rs
  */
 package com.example.gravity;
 

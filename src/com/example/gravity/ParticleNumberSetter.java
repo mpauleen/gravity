@@ -17,7 +17,7 @@ public class ParticleNumberSetter extends Activity {
 		
 		SeekBar partCount = (SeekBar) findViewById(R.id.particleNum);
 
-		partCount.setMax(100000);
+		partCount.setMax(99999);
 		partCount.setProgress(MainActivity.partCount);
 		progress = 40000;
 		TextView text = (TextView) findViewById(R.id.partNum);
@@ -27,7 +27,8 @@ public class ParticleNumberSetter extends Activity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				progress = (seekBar.getProgress()+1);
+				progress = seekBar.getProgress();
+				progress++;
 				
 			}
 			
@@ -42,7 +43,9 @@ public class ParticleNumberSetter extends Activity {
 					boolean fromUser) {
 				// TODO Auto-generated method stub
 				TextView text = (TextView) findViewById(R.id.partNum);
-				text.setText(""+seekBar.getProgress()+1);
+				progress = seekBar.getProgress();
+				progress++;
+				text.setText(""+progress);
 				
 			}
 		});
