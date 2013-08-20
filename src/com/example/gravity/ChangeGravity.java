@@ -1,12 +1,16 @@
 package com.example.gravity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
-import android.widget.ToggleButton;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.ToggleButton;
 
 public class ChangeGravity extends Activity {
 
@@ -21,7 +25,7 @@ public class ChangeGravity extends Activity {
 		setContentView(R.layout.activity_change_gravity);
 		
 		SeekBar acceleration = (SeekBar) findViewById(R.id.accBar);
-		acceleration.setMax(200);
+		acceleration.setMax(150);
 		acceleration.setProgress((int)MainActivity.acc);
 		acceleration.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
@@ -46,14 +50,13 @@ public class ChangeGravity extends Activity {
 		});
 		
 		SeekBar delta = (SeekBar) findViewById(R.id.deltaBar);
-		delta.setMax(192);
+		delta.setMax(144);
 		delta.setProgress((int)(MainActivity.delta*100));
 		delta.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				deltaNum = (float) seekBar.getProgress()/100;
-				
 			}
 			
 			@Override
@@ -80,6 +83,23 @@ public class ChangeGravity extends Activity {
 					MainActivity.wrap = true;
 				 else
 					MainActivity.wrap = false;
+				
+			}
+		});
+		
+		Button gravityReset = (Button) findViewById(R.id.resetGravity);
+		
+		gravityReset.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				MainActivity.wrap = false;
+				MainActivity.delta = 0.96f;
+				MainActivity.acc = 100.f;
+				Intent intent = new Intent(getApplicationContext(),ChangeGravity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				startActivity(intent);
+				finish();
 				
 			}
 		});

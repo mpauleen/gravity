@@ -59,4 +59,13 @@
         android:layout_centerHorizontal="true"
         android:text="ToggleButton" />
 
+    <Button
+        android:id="@+id/resetGravity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/wrapButton"
+        android:layout_marginTop="18dp"
+        android:text="Reset" />
+
 </RelativeLayout>
