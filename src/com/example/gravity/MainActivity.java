@@ -92,4 +92,30 @@ public class MainActivity extends Activity {
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+	
+	public static void resetParticle() {
+		partCount = 40000;
+	}
+	
+	public static void resetGravity(){
+		acc = 100f;
+		delta = 0.96f;
+		wrap = false;
+	}
+	
+	public static void resetColor() {
+		r = 128;
+		g = 230;
+		b = 230;
+	}
+	
+	public static void resetAll() {
+		resetColor();
+		resetGravity();
+		resetParticle();
+		instance.mView = new GravityView(instance, partCount);
+		instance.setContentView(instance.mView);
+	}
+	
+	
 }

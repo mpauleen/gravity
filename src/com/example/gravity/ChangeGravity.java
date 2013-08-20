@@ -46,7 +46,7 @@ public class ChangeGravity extends Activity {
 		});
 		
 		SeekBar delta = (SeekBar) findViewById(R.id.deltaBar);
-		delta.setMax(200);
+		delta.setMax(192);
 		delta.setProgress((int)(MainActivity.delta*100));
 		delta.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
