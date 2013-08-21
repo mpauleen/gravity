@@ -14,7 +14,7 @@ public class GravityRS {
     }
     
 
-
+	boolean multiple = false;
     private Resources mRes;
 	private RenderScriptGL mRS;
     private ScriptC_gravity mScript;
@@ -76,8 +76,15 @@ public class GravityRS {
     }
 
     public void newTouchPosition(float x, float y, float pressure, int id) {
-        mScript.set_gTouchX(x);
-        mScript.set_gTouchY(y);
+        mScript.set_gTouchX1(x);
+        mScript.set_gTouchY1(y);
+        mScript.set_multiple(multiple);
+    }
+    
+    public void newTouchPosition2(float x, float y, float pressure, int id) {
+        mScript.set_gTouchX2(x);
+        mScript.set_gTouchY2(y);
+        mScript.set_multiple(multiple);
     }
     
 }
