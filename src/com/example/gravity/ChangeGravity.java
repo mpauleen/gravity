@@ -25,13 +25,13 @@ public class ChangeGravity extends Activity {
 		setContentView(R.layout.activity_change_gravity);
 		
 		SeekBar acceleration = (SeekBar) findViewById(R.id.accBar);
-		acceleration.setMax(150);
-		acceleration.setProgress((int)MainActivity.acc);
+		acceleration.setMax(90);
+		acceleration.setProgress((int)MainActivity.acc - 10);
 		acceleration.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				acc = (float) seekBar.getProgress();
+				acc = (float) (seekBar.getProgress()+10);
 				
 			}
 			
@@ -50,7 +50,7 @@ public class ChangeGravity extends Activity {
 		});
 		
 		SeekBar delta = (SeekBar) findViewById(R.id.deltaBar);
-		delta.setMax(144);
+		delta.setMax(100);
 		delta.setProgress((int)(MainActivity.delta*100));
 		delta.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
