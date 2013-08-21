@@ -48,7 +48,7 @@ public class GravityRS {
         mScript.invoke_initParticles(); // Initialize Particles
     }
     
-    public void setColor(int r, int g, int b) {
+    public void setColor(int r, int g, int b, boolean black) {
     	float red = (float) r/255;
     	float green = (float) g/255;
     	float blue = (float) b/255;
@@ -58,6 +58,7 @@ public class GravityRS {
         mScript.set_redRS(red);
         mScript.set_greenRS(green);
         mScript.set_blueRS(blue);
+        mScript.set_blackRS(black);
         System.out.println("Set Color");
     }
     

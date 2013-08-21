@@ -45,6 +45,7 @@ public class ScriptC_gravity extends ScriptC {
         mExportVar_redRS = 0.5f;
         mExportVar_greenRS = 0.9f;
         mExportVar_blueRS = 0.9f;
+        mExportVar_blackRS = true;
         mExportVar_delta = 0.96f;
         mExportVar_acceleration = 100f;
     }
@@ -124,7 +125,24 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_blueRS;
     }
 
-    private final static int mExportVarIdx_delta = 6;
+    private final static int mExportVarIdx_blackRS = 6;
+    private boolean mExportVar_blackRS;
+    public synchronized void set_blackRS(boolean v) {
+        if (__rs_fp_BOOLEAN!= null) {
+            __rs_fp_BOOLEAN.reset();
+        } else {
+            __rs_fp_BOOLEAN = new FieldPacker(1);
+        }
+        __rs_fp_BOOLEAN.addBoolean(v);
+        setVar(mExportVarIdx_blackRS, __rs_fp_BOOLEAN);
+        mExportVar_blackRS = v;
+    }
+
+    public boolean get_blackRS() {
+        return mExportVar_blackRS;
+    }
+
+    private final static int mExportVarIdx_delta = 7;
     private float mExportVar_delta;
     public synchronized void set_delta(float v) {
         setVar(mExportVarIdx_delta, v);
@@ -135,7 +153,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_delta;
     }
 
-    private final static int mExportVarIdx_acceleration = 7;
+    private final static int mExportVarIdx_acceleration = 8;
     private float mExportVar_acceleration;
     public synchronized void set_acceleration(float v) {
         setVar(mExportVarIdx_acceleration, v);
@@ -146,7 +164,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_acceleration;
     }
 
-    private final static int mExportVarIdx_point = 8;
+    private final static int mExportVarIdx_point = 9;
     private ScriptField_Point mExportVar_point;
     public void bind_point(ScriptField_Point v) {
         mExportVar_point = v;
@@ -158,7 +176,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_point;
     }
 
-    private final static int mExportVarIdx_partMesh = 9;
+    private final static int mExportVarIdx_partMesh = 10;
     private Mesh mExportVar_partMesh;
     public synchronized void set_partMesh(Mesh v) {
         setVar(mExportVarIdx_partMesh, v);

@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 	public static float delta = 0.96f;
 	public static float acc = 100.f;
 	public static boolean wrap = false;
+	public static boolean black = true;
 	static MainActivity instance;
 	
 	private GravityView mView;
@@ -88,7 +89,7 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		System.out.println(requestCode);
 		if(requestCode == 1) {
-			mView.mRender.setColor(r, g, b);
+			mView.mRender.setColor(r, g, b, black);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

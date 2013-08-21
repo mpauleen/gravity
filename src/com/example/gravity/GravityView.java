@@ -16,26 +16,26 @@ public class GravityView extends RSSurfaceView {
     public GravityView(Context context, int particleCount) {
         super(context);
         this.particleCount = particleCount;
-        touchTracker = 0;
-        
-        Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while (true) {
-					if (touchTracker > 0)
-						touchTracker --;
-					else {
-						try {
-						mRender.newTouchPosition(-1, -1, 0, 0);
-						} catch (Exception e) {}
-					}
-					try {
-						Thread.sleep(10);
-					} catch (Exception e) {}
-				}
-			}
-		});
-        t.start();
+//        touchTracker = 0;
+//        
+//        Thread t = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				while (true) {
+//					if (touchTracker > 0)
+//						touchTracker --;
+//					else {
+//						try {
+//						mRender.newTouchPosition(-1, -1, 0, 0);
+//						} catch (Exception e) {}
+//					}
+//					try {
+//						Thread.sleep(10);
+//					} catch (Exception e) {}
+//				}
+//			}
+//		});
+//        t.start();
     }
 
     private RenderScriptGL mRS;

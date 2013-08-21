@@ -14,6 +14,7 @@ bool wrap = false;
 float redRS = 0.5f;
 float greenRS = 0.9f;
 float blueRS = 0.9f;
+bool blackRS = true;
 
 float delta = 0.96f;
 
@@ -59,8 +60,11 @@ int root() {
     float width = rsgGetWidth();
     float height = rsgGetHeight();
     
+    if (blackRS){
     rsgClearColor(0.0f, 0.0f, 0.0f, 1.f);
-    
+    } else {
+        rsgClearColor(1.0f, 1.0f, 1.0f, 1.f);
+    }
     int size = rsAllocationGetDimX(rsGetAllocation(point));
     Point_t *p = point;
 

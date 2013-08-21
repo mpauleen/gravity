@@ -6,7 +6,9 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.ToggleButton;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
@@ -126,6 +128,22 @@ public class ColorChooserDialog extends Activity {
 				s.draw(new Canvas());
 			}
 		});
+		
+		ToggleButton background = (ToggleButton) findViewById(R.id.toggleBackground);
+		background.setChecked(MainActivity.black);
+		background.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked)
+					MainActivity.black = true;
+				 else
+					MainActivity.black = false;
+				
+				
+			}
+		});
+
 
 		// dialogButton.setOnClickListener(new OnClickListener() {
 		// @Override
