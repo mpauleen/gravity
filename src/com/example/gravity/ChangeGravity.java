@@ -50,13 +50,13 @@ public class ChangeGravity extends Activity {
 		});
 		
 		SeekBar delta = (SeekBar) findViewById(R.id.deltaBar);
-		delta.setMax(100);
-		delta.setProgress((int)(MainActivity.delta*100));
+		delta.setMax(50);
+		delta.setProgress((int)(MainActivity.delta*100) - 50);
 		delta.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				deltaNum = (float) seekBar.getProgress()/100;
+				deltaNum = (50 +(float) seekBar.getProgress())/100;
 			}
 			
 			@Override
