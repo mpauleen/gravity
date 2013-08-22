@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 	public static float acc = 100.f;
 	public static boolean wrap = false;
 	public static boolean black = true;
+	public static boolean persist = true;
 	static MainActivity instance;
 	
 	private GravityView mView;
@@ -45,7 +46,7 @@ public class MainActivity extends Activity {
 	
 	public static void notifyGravityChanged(){
 		instance.mView.mRender.setGravity(delta, acc, wrap);
-	}
+			}
 
 	@Override
 	protected void onResume() {

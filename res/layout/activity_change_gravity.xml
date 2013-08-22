@@ -50,22 +50,42 @@
         android:text="Wrapping"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ToggleButton
-        android:id="@+id/wrapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:text="ToggleButton" />
-
     <Button
         android:id="@+id/resetGravity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/wrapButton"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="68dp"
         android:text="Reset" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/resetGravity"
+        android:layout_below="@+id/wrapButton"
+        android:layout_marginTop="25dp"
+        android:text="Gravity Persist"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ToggleButton
+        android:id="@+id/persistToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="ToggleButton" />
+
+    <ToggleButton
+        android:id="@+id/wrapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/persistToggle"
+        android:text="ToggleButton" />
 
 </RelativeLayout>

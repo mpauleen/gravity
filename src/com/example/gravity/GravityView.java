@@ -100,8 +100,13 @@ public class GravityView extends RSSurfaceView {
             break;
         }
         
-        case MotionEvent.ACTION_POINTER_2_UP:
-        	System.out.println("up");
+        case MotionEvent.ACTION_UP: 
+        	if(!MainActivity.persist){
+            mRender.newTouchPosition(-1, -1, 0, 0);
+            mRender.newTouchPosition2(-1, -1, 0, 0); 
+            System.out.println("up");
+        	} else
+				System.out.println("not up");
         	break;
         }
         return true;

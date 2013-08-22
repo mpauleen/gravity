@@ -268,5 +268,5 @@ else {
 	}
 	rsgDrawMesh(partMesh);
 
-	return 17;
+	return 30;
 }

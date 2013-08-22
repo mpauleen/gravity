@@ -87,6 +87,21 @@ public class ChangeGravity extends Activity {
 			}
 		});
 		
+		ToggleButton persist = (ToggleButton) findViewById(R.id.persistToggle);
+		persist.setChecked(MainActivity.persist);
+		persist.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked)
+					MainActivity.persist = true;
+				 else
+					MainActivity.persist = false;
+				System.out.println(MainActivity.persist);
+			}
+			
+		});
+		
 		Button gravityReset = (Button) findViewById(R.id.resetGravity);
 		
 		gravityReset.setOnClickListener(new OnClickListener() {
