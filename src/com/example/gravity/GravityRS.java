@@ -21,7 +21,8 @@ public class GravityRS {
     static float r = 0.5f;
     static float g = 0.9f;
     static float b = 0.9f;
-
+    static int i =0;
+    
     public void init(RenderScriptGL rs, Resources res, int width, int height) {
         mRS = rs;
         mRes = res;
@@ -75,13 +76,14 @@ public class GravityRS {
     	mScript.set_wrap(wrap);
     }
 
-    public void newTouchPosition(float x, float y, float pressure, int id) {
+    public void newTouchPosition(int x, int y, float pressure, int id) {
         mScript.set_gTouchX1(x);
         mScript.set_gTouchY1(y);
         mScript.set_multiple(multiple);
+
     }
     
-    public void newTouchPosition2(float x, float y, float pressure, int id) {
+    public void newTouchPosition2(int x, int y, float pressure, int id) {
         mScript.set_gTouchX2(x);
         mScript.set_gTouchY2(y);
         mScript.set_multiple(multiple);
