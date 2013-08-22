@@ -39,8 +39,12 @@ public class ScriptC_gravity extends ScriptC {
 
     public  ScriptC_gravity(RenderScript rs, Resources resources, int id) {
         super(rs, resources, id);
+        mExportVar_inX1 = -1f;
+        mExportVar_inY1 = -1f;
         mExportVar_gTouchX1 = -1;
         mExportVar_gTouchY1 = -1;
+        mExportVar_inX2 = -1f;
+        mExportVar_inY2 = -1f;
         mExportVar_gTouchX2 = -1;
         mExportVar_gTouchY2 = -1;
         mExportVar_current = 1;
@@ -58,7 +62,29 @@ public class ScriptC_gravity extends ScriptC {
     private FieldPacker __rs_fp_F32;
     private FieldPacker __rs_fp_I32;
     private FieldPacker __rs_fp_MESH;
-    private final static int mExportVarIdx_gTouchX1 = 0;
+    private final static int mExportVarIdx_inX1 = 0;
+    private float mExportVar_inX1;
+    public synchronized void set_inX1(float v) {
+        setVar(mExportVarIdx_inX1, v);
+        mExportVar_inX1 = v;
+    }
+
+    public float get_inX1() {
+        return mExportVar_inX1;
+    }
+
+    private final static int mExportVarIdx_inY1 = 1;
+    private float mExportVar_inY1;
+    public synchronized void set_inY1(float v) {
+        setVar(mExportVarIdx_inY1, v);
+        mExportVar_inY1 = v;
+    }
+
+    public float get_inY1() {
+        return mExportVar_inY1;
+    }
+
+    private final static int mExportVarIdx_gTouchX1 = 2;
     private int mExportVar_gTouchX1;
     public synchronized void set_gTouchX1(int v) {
         setVar(mExportVarIdx_gTouchX1, v);
@@ -69,7 +95,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_gTouchX1;
     }
 
-    private final static int mExportVarIdx_gTouchY1 = 1;
+    private final static int mExportVarIdx_gTouchY1 = 3;
     private int mExportVar_gTouchY1;
     public synchronized void set_gTouchY1(int v) {
         setVar(mExportVarIdx_gTouchY1, v);
@@ -80,7 +106,29 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_gTouchY1;
     }
 
-    private final static int mExportVarIdx_gTouchX2 = 2;
+    private final static int mExportVarIdx_inX2 = 4;
+    private float mExportVar_inX2;
+    public synchronized void set_inX2(float v) {
+        setVar(mExportVarIdx_inX2, v);
+        mExportVar_inX2 = v;
+    }
+
+    public float get_inX2() {
+        return mExportVar_inX2;
+    }
+
+    private final static int mExportVarIdx_inY2 = 5;
+    private float mExportVar_inY2;
+    public synchronized void set_inY2(float v) {
+        setVar(mExportVarIdx_inY2, v);
+        mExportVar_inY2 = v;
+    }
+
+    public float get_inY2() {
+        return mExportVar_inY2;
+    }
+
+    private final static int mExportVarIdx_gTouchX2 = 6;
     private int mExportVar_gTouchX2;
     public synchronized void set_gTouchX2(int v) {
         setVar(mExportVarIdx_gTouchX2, v);
@@ -91,7 +139,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_gTouchX2;
     }
 
-    private final static int mExportVarIdx_gTouchY2 = 3;
+    private final static int mExportVarIdx_gTouchY2 = 7;
     private int mExportVar_gTouchY2;
     public synchronized void set_gTouchY2(int v) {
         setVar(mExportVarIdx_gTouchY2, v);
@@ -102,7 +150,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_gTouchY2;
     }
 
-    private final static int mExportVarIdx_current = 4;
+    private final static int mExportVarIdx_current = 8;
     private int mExportVar_current;
     public synchronized void set_current(int v) {
         setVar(mExportVarIdx_current, v);
@@ -113,7 +161,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_current;
     }
 
-    private final static int mExportVarIdx_frame1 = 5;
+    private final static int mExportVarIdx_frame1 = 9;
     private int mExportVar_frame1;
     public synchronized void set_frame1(int v) {
         setVar(mExportVarIdx_frame1, v);
@@ -124,7 +172,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_frame1;
     }
 
-    private final static int mExportVarIdx_frame2 = 6;
+    private final static int mExportVarIdx_frame2 = 10;
     private int mExportVar_frame2;
     public synchronized void set_frame2(int v) {
         setVar(mExportVarIdx_frame2, v);
@@ -135,7 +183,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_frame2;
     }
 
-    private final static int mExportVarIdx_wrap = 7;
+    private final static int mExportVarIdx_wrap = 11;
     private boolean mExportVar_wrap;
     public synchronized void set_wrap(boolean v) {
         if (__rs_fp_BOOLEAN!= null) {
@@ -152,7 +200,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_wrap;
     }
 
-    private final static int mExportVarIdx_multiple = 8;
+    private final static int mExportVarIdx_multiple = 12;
     private boolean mExportVar_multiple;
     public synchronized void set_multiple(boolean v) {
         if (__rs_fp_BOOLEAN!= null) {
@@ -169,7 +217,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_multiple;
     }
 
-    private final static int mExportVarIdx_redRS = 9;
+    private final static int mExportVarIdx_redRS = 13;
     private float mExportVar_redRS;
     public synchronized void set_redRS(float v) {
         setVar(mExportVarIdx_redRS, v);
@@ -180,7 +228,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_redRS;
     }
 
-    private final static int mExportVarIdx_greenRS = 10;
+    private final static int mExportVarIdx_greenRS = 14;
     private float mExportVar_greenRS;
     public synchronized void set_greenRS(float v) {
         setVar(mExportVarIdx_greenRS, v);
@@ -191,7 +239,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_greenRS;
     }
 
-    private final static int mExportVarIdx_blueRS = 11;
+    private final static int mExportVarIdx_blueRS = 15;
     private float mExportVar_blueRS;
     public synchronized void set_blueRS(float v) {
         setVar(mExportVarIdx_blueRS, v);
@@ -202,7 +250,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_blueRS;
     }
 
-    private final static int mExportVarIdx_blackRS = 12;
+    private final static int mExportVarIdx_blackRS = 16;
     private boolean mExportVar_blackRS;
     public synchronized void set_blackRS(boolean v) {
         if (__rs_fp_BOOLEAN!= null) {
@@ -219,7 +267,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_blackRS;
     }
 
-    private final static int mExportVarIdx_delta = 13;
+    private final static int mExportVarIdx_delta = 17;
     private float mExportVar_delta;
     public synchronized void set_delta(float v) {
         setVar(mExportVarIdx_delta, v);
@@ -230,7 +278,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_delta;
     }
 
-    private final static int mExportVarIdx_acceleration = 14;
+    private final static int mExportVarIdx_acceleration = 18;
     private float mExportVar_acceleration;
     public synchronized void set_acceleration(float v) {
         setVar(mExportVarIdx_acceleration, v);
@@ -241,7 +289,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_acceleration;
     }
 
-    private final static int mExportVarIdx_point = 15;
+    private final static int mExportVarIdx_point = 19;
     private ScriptField_Point mExportVar_point;
     public void bind_point(ScriptField_Point v) {
         mExportVar_point = v;
@@ -253,7 +301,7 @@ public class ScriptC_gravity extends ScriptC {
         return mExportVar_point;
     }
 
-    private final static int mExportVarIdx_partMesh = 16;
+    private final static int mExportVarIdx_partMesh = 20;
     private Mesh mExportVar_partMesh;
     public synchronized void set_partMesh(Mesh v) {
         setVar(mExportVarIdx_partMesh, v);

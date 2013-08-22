@@ -43,7 +43,7 @@ public class GravityView extends RSSurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent ev)
     {
-        mRender.newTouchPosition((int) ev.getX(0), (int)ev.getY(0), ev.getPressure(0), ev.getPointerId(0));        
+        mRender.newTouchPosition(ev.getX(0), ev.getY(0));        
         
         
         // get pointer index from the event object
@@ -59,8 +59,9 @@ public class GravityView extends RSSurfaceView {
 
         case MotionEvent.ACTION_DOWN:
         case MotionEvent.ACTION_POINTER_DOWN: {
+          // We have a new pointer. Lets add it to the list of pointers
         	if(ev.getPointerCount() > 1) {
-            mRender.newTouchPosition2((int) ev.getX(1), (int) ev.getY(1), 0, 0);  
+            mRender.newTouchPosition2(ev.getX(1), ev.getY(1));  
             mRender.multiple = true;
         	}
         	else
@@ -69,7 +70,7 @@ public class GravityView extends RSSurfaceView {
         }
         case MotionEvent.ACTION_MOVE: {
         	if(ev.getPointerCount() > 1) {
-            mRender.newTouchPosition2((int)ev.getX(1), (int) ev.getY(1), 0, 0); 
+            mRender.newTouchPosition2(ev.getX(1), ev.getY(1)); 
             mRender.multiple = true;
         	}
         	else
@@ -79,8 +80,8 @@ public class GravityView extends RSSurfaceView {
         
         case MotionEvent.ACTION_UP: 
         	if(!MainActivity.persist){
-            mRender.newTouchPosition(-1, -1, 0, 0);
-            mRender.newTouchPosition2(-1, -1, 0, 0); 
+            mRender.newTouchPosition(-1, -1);
+            mRender.newTouchPosition2(-1, -1); 
         	}
         	break;
         }

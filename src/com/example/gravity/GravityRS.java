@@ -76,16 +76,16 @@ public class GravityRS {
     	mScript.set_wrap(wrap);
     }
 
-    public void newTouchPosition(int x, int y, float pressure, int id) {
-        mScript.set_gTouchX1(x);
-        mScript.set_gTouchY1(y);
+    public void newTouchPosition(float x, float y) {
+        mScript.set_inX1(x);
+        mScript.set_inY1(y);
         mScript.set_multiple(multiple);
 
     }
     
-    public void newTouchPosition2(int x, int y, float pressure, int id) {
-        mScript.set_gTouchX2(x);
-        mScript.set_gTouchY2(y);
+    public void newTouchPosition2(float x, float y) {
+        mScript.set_inX2(x);
+        mScript.set_inY2(y);
         mScript.set_multiple(multiple);
     }
     

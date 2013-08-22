@@ -7,8 +7,14 @@
 static int newPart = 0;
 static int initialized = 0;
 
+float inX1 = -1.f;
+float inY1 = -1.f;
+
 int gTouchX1 = -1;
 int gTouchY1 = -1;
+
+float inX2 = -1.f;
+float inY2 = -1.f;
 
 int gTouchX2 = -1;
 int gTouchY2 = -1;
@@ -65,8 +71,10 @@ void initParticles() {
  */
 int root() {
 	uchar4 c = rsPackColorTo8888(redRS, greenRS, blueRS);
-	float width = rsgGetWidth();
-	float height = rsgGetHeight();
+	gTouchX1 = (int) inX1;
+	gTouchY1 = (int) inY1;
+	int width = rsgGetWidth();
+	int height = rsgGetHeight();
 //Background Switch 
 	if (blackRS) {
 		rsgClearColor(0.0f, 0.0f, 0.0f, 1.f);
@@ -93,47 +101,45 @@ int root() {
 			gTouchY1 = temp;
 		}
 		if (gTouchY1 < 0 && gTouchY1 != -1) {
+
 			temp = gTouchX1;
 			gTouchX1 = gTouchY1;
 			gTouchY1 = temp;
 		}
 	}
-	if (gTouchX2 > width){
-		gTouchY2 = temp;
-		gTouchX2 = gTouchY2;
-		temp = gTouchX2;
-	}
-
-	if (gTouchX2 > width){
-		temp = gTouchX2;
-		gTouchX2 = gTouchY2;
-		gTouchY2 = temp;
-	}
-	if (gTouchY2 > height) {
-		temp = gTouchX2;
-		gTouchX2 = gTouchY2;
-		gTouchY2 = temp;
-	}
-	else {
-		if (gTouchX2 < 0 && gTouchX2 != -1) {
-			temp = gTouchX2;
-			gTouchX2 = gTouchY2;
-			gTouchY2 = temp;
-		}
-		if (gTouchY2 < 0 && gTouchY2 != -1) {
-			temp = gTouchX2;
-			gTouchX2 = gTouchY2;
-			gTouchY2 = temp;
-		}
-	}
-	if (gTouchX1 > width){
-		gTouchY1 = temp;
-		gTouchX1 = gTouchY1;
-		temp = gTouchX1;
-	}
 	rsDebug("multiple: ", multiple);
 	if (multiple) {
 // If wrap true
+		gTouchX2 = (int) inX2;
+		gTouchY2 = (int) inY2;
+		if (gTouchX2 > width){
+			gTouchY2 = temp;
+			gTouchX2 = gTouchY2;
+			temp = gTouchX2;
+		}
+
+		if (gTouchX2 > width){
+			temp = gTouchX2;
+			gTouchX2 = gTouchY2;
+			gTouchY2 = temp;
+		}
+		if (gTouchY2 > height) {
+			temp = gTouchX2;
+			gTouchX2 = gTouchY2;
+			gTouchY2 = temp;
+		}
+		else {
+			if (gTouchX2 < 0 && gTouchX2 != -1) {
+				temp = gTouchX2;
+				gTouchX2 = gTouchY2;
+				gTouchY2 = temp;
+			}
+			if (gTouchY2 < 0 && gTouchY2 != -1) {
+				temp = gTouchX2;
+				gTouchX2 = gTouchY2;
+				gTouchY2 = temp;
+			}
+		}
 		if (wrap) {
 			for (int i = 0; i < size; i++) {
 				if (gTouchX1 != -1) {

@@ -25,7 +25,7 @@ public class ChangeGravity extends Activity {
 		setContentView(R.layout.activity_change_gravity);
 		
 		SeekBar acceleration = (SeekBar) findViewById(R.id.accBar);
-		acceleration.setMax(90);
+		acceleration.setMax(140);
 		acceleration.setProgress((int)MainActivity.acc - 10);
 		acceleration.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
