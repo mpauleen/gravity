@@ -13,12 +13,14 @@ public class MainActivity extends Activity {
 	public static int r = 128;
 	public static int g = 230;
 	public static int b = 230;
-	public static int partCount = 40000;
+	public static int partCount = 20000;
 	public static float delta = 0.96f;
 	public static float acc = 100.f;
 	public static boolean wrap = false;
 	public static boolean black = true;
 	public static boolean persist = true;
+	public static boolean sensitive = false;
+	public static boolean hotzones = false;
 	static MainActivity instance;
 	
 	private GravityView mView;
@@ -40,7 +42,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public static void notifyGravityChanged(){
-		instance.mView.mRender.setGravity(delta, acc, wrap);
+		instance.mView.mRender.setGravity(delta, acc, wrap, sensitive);
 			}
 
 	@Override
@@ -85,7 +87,7 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		System.out.println(requestCode);
 		if(requestCode == 1) {
-			mView.mRender.setColor(r, g, b, black);
+			mView.mRender.setColor(r, g, b, black, hotzones);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -98,12 +100,16 @@ public class MainActivity extends Activity {
 		acc = 100f;
 		delta = 0.96f;
 		wrap = false;
+		persist = true;
+		sensitive = false;
+		
 	}
 	
 	public static void resetColor() {
 		r = 128;
 		g = 230;
 		b = 230;
+		hotzones = false;
 	}
 	
 	public static void resetAll() {

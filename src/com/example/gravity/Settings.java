@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class Settings extends ListActivity {
 
@@ -21,13 +20,11 @@ public class Settings extends ListActivity {
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	requestWindowFeature(Window.FEATURE_LEFT_ICON);
-	getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.ic_action_action_settings);
 
-	// no more this
-	// setContentView(R.layout.list_fruit);
 
 	setListAdapter(new ArrayAdapter<String>(this, R.layout.activity_settings,FRUITS));
 	setTitle("Settings");
+	getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.ic_action_action_settings);
 
 	ListView listView = getListView();
 	listView.setTextFilterEnabled(true);

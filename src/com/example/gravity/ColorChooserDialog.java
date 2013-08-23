@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.ToggleButton;
@@ -18,6 +19,7 @@ public class ColorChooserDialog extends Activity {
 	int r = MainActivity.r;
 	int g = MainActivity.g;
 	int b = MainActivity.b;
+	boolean hotzones = MainActivity.hotzones;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +142,20 @@ public class ColorChooserDialog extends Activity {
 				 else
 					MainActivity.black = false;
 				
+				
+			}
+		});
+		
+		CheckBox hotzone = (CheckBox) findViewById(R.id.hotzoneCheck);
+		hotzone.setChecked(MainActivity.hotzones);
+		hotzone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked)
+					MainActivity.hotzones = true;
+				 else
+					MainActivity.hotzones = false;
 				
 			}
 		});

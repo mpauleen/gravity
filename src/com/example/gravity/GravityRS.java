@@ -7,7 +7,7 @@ import android.renderscript.RenderScriptGL;
 
 @SuppressWarnings("deprecation")
 public class GravityRS {
-    public static int PART_COUNT = 40000; // Count of particles
+    public static int PART_COUNT = 20000; // Count of particles
 
     public GravityRS(int partCount) {
     	PART_COUNT = partCount;
@@ -49,24 +49,27 @@ public class GravityRS {
         mScript.invoke_initParticles(); // Initialize Particles
     }
     
-    public void setColor(int r, int g, int b, boolean black) {
+    public void setColor(int r, int g, int b, boolean black, boolean hotzones) {
     	float red = (float) r/255;
     	float green = (float) g/255;
     	float blue = (float) b/255;
     	System.out.println(red);
     	System.out.println(green);
     	System.out.println(blue);
+    	System.out.println(hotzones);
         mScript.set_redRS(red);
         mScript.set_greenRS(green);
         mScript.set_blueRS(blue);
         mScript.set_blackRS(black);
+        mScript.set_hotzones(hotzones);
         System.out.println("Set Color");
     }
     
-    public void setGravity (float delta, float acc, boolean wrapped) {
+    public void setGravity (float delta, float acc, boolean wrapped, boolean sensitivity) {
     	mScript.set_acceleration(acc);
     	mScript.set_delta(delta);
     	mScript.set_wrap(wrapped);
+    	mScript.set_sensitive(sensitivity);
     	System.out.println(mScript.get_delta());
     	System.out.println(mScript.get_acceleration());
     	System.out.println(wrapped);
@@ -76,16 +79,18 @@ public class GravityRS {
     	mScript.set_wrap(wrap);
     }
 
-    public void newTouchPosition(float x, float y) {
+    public void newTouchPosition(float x, float y, float p) {
         mScript.set_inX1(x);
         mScript.set_inY1(y);
+        mScript.set_p1(p);
         mScript.set_multiple(multiple);
 
     }
     
-    public void newTouchPosition2(float x, float y) {
+    public void newTouchPosition2(float x, float y, float p) {
         mScript.set_inX2(x);
         mScript.set_inY2(y);
+        mScript.set_p2(p);
         mScript.set_multiple(multiple);
     }
     

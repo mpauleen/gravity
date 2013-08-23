@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -24,9 +25,13 @@ public class ChangeGravity extends Activity {
 		setTitle("Set Gravity");
 		setContentView(R.layout.activity_change_gravity);
 		
-		SeekBar acceleration = (SeekBar) findViewById(R.id.accBar);
+		final SeekBar acceleration = (SeekBar) findViewById(R.id.accBar);
 		acceleration.setMax(140);
 		acceleration.setProgress((int)MainActivity.acc - 10);
+		if(MainActivity.sensitive){
+			acceleration.setEnabled(false);
+		} else
+			acceleration.setEnabled(true);
 		acceleration.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
 			@Override
@@ -73,7 +78,7 @@ public class ChangeGravity extends Activity {
 			}
 		});
 		
-		ToggleButton wrap = (ToggleButton) findViewById(R.id.wrapButton);
+		CheckBox wrap = (CheckBox) findViewById(R.id.wrapButton);
 		wrap.setChecked(MainActivity.wrap);
 		wrap.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
@@ -87,7 +92,7 @@ public class ChangeGravity extends Activity {
 			}
 		});
 		
-		ToggleButton persist = (ToggleButton) findViewById(R.id.persistToggle);
+		CheckBox persist = (CheckBox) findViewById(R.id.persistToggle);
 		persist.setChecked(MainActivity.persist);
 		persist.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
@@ -98,6 +103,26 @@ public class ChangeGravity extends Activity {
 				 else
 					MainActivity.persist = false;
 				System.out.println(MainActivity.persist);
+			}
+			
+		});
+		
+		CheckBox sensitive = (CheckBox) findViewById(R.id.sensitiveToggle);
+		sensitive.setChecked(MainActivity.sensitive);
+		sensitive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked) {
+					MainActivity.sensitive = true;
+					MainActivity.acc = 100;
+					acceleration.setEnabled(false);
+				}
+				 else {
+					MainActivity.sensitive = false;
+					acceleration.setEnabled(true);
+				 }
+				System.out.println(MainActivity.sensitive);
 			}
 			
 		});

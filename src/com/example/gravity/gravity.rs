@@ -13,8 +13,16 @@ float inY1 = -1.f;
 int gTouchX1 = -1;
 int gTouchY1 = -1;
 
+long t1, t2;
+
 float inX2 = -1.f;
 float inY2 = -1.f;
+
+float p1 = .5f;
+float p2 = .5f;
+float delta = 0.96f;
+float acceleration = 100.f;
+bool sensitive = true;
 
 int gTouchX2 = -1;
 int gTouchY2 = -1;
@@ -26,14 +34,14 @@ int frame2;
 
 bool wrap = false;
 bool multiple = false;
+
+uchar4 c;
 float redRS = 0.5f;
 float greenRS = 0.9f;
 float blueRS = 0.9f;
 bool blackRS = true;
+bool hotzones = false;
 
-float delta = 0.96f;
-
-float acceleration = 100.f;
 
 typedef struct __attribute__((packed, aligned(4))) Point {
 	float2 delta;
@@ -53,7 +61,7 @@ void initParticles() {
 	int size = rsAllocationGetDimX(rsGetAllocation(point));
 	float width = rsgGetWidth();
 	float height = rsgGetHeight();
-	uchar4 c = rsPackColorTo8888(redRS, greenRS, blueRS);
+	c = rsPackColorTo8888(redRS, greenRS, blueRS);
 	Point_t *p = point;
 	for (int i = 0; i < size; i++) {
 		p->position.x = rsRand(width);
@@ -70,11 +78,15 @@ void initParticles() {
  * root() is called every time a frame refresh occurs
  */
 int root() {
-	uchar4 c = rsPackColorTo8888(redRS, greenRS, blueRS);
+	if(hotzones)
+		c = rsPackColorTo8888(1, greenRS, blueRS);
+	else
+		c = rsPackColorTo8888(redRS, greenRS, blueRS);
 	gTouchX1 = (int) inX1;
 	gTouchY1 = (int) inY1;
 	int width = rsgGetWidth();
 	int height = rsgGetHeight();
+//hotzones
 //Background Switch 
 	if (blackRS) {
 		rsgClearColor(0.0f, 0.0f, 0.0f, 1.f);
@@ -107,11 +119,17 @@ int root() {
 			gTouchY1 = temp;
 		}
 	}
-	rsDebug("multiple: ", multiple);
+//	rsDebug("multiple: ", multiple);
 	if (multiple) {
+		if(hotzones)
+			c = rsPackColorTo8888(1, greenRS, blueRS);
 // If wrap true
+		//TODO Multiple-Wrap
 		gTouchX2 = (int) inX2;
 		gTouchY2 = (int) inY2;
+		
+		if(abs(gTouchX2-gTouchX1) < 10 && abs(gTouchY2-gTouchY1) < 10)
+			multiple = false;
 		if (gTouchX2 > width){
 			gTouchY2 = temp;
 			gTouchX2 = gTouchY2;
@@ -142,11 +160,18 @@ int root() {
 		}
 		if (wrap) {
 			for (int i = 0; i < size; i++) {
+				float diff_x = gTouchX1 - p->position.x;
+				float diff_y = gTouchY1 - p->position.y;
+				float dist = (diff_x * diff_x + diff_y * diff_y);
 				if (gTouchX1 != -1) {
-					float diff_x = gTouchX1 - p->position.x;
-					float diff_y = gTouchY1 - p->position.y;
-					float acc = acceleration
-							/ (diff_x * diff_x + diff_y * diff_y);
+					float acc;
+					if (sensitive) {
+						acc = p1*2*acceleration / dist;
+					} else {
+						acc = acceleration / dist;
+					}
+
+					
 					float acc_x = acc * diff_x;
 					float acc_y = acc * diff_y;
 
@@ -161,13 +186,18 @@ int root() {
 				p->position.x += p->delta.x;
 				p->position.y += p->delta.y;
 
+				float diff_x2 = gTouchX2 - p->position.x;
+				float diff_y2 = gTouchY2 - p->position.y;
+				float dist2 = (diff_x2 * diff_x2 + diff_y2 * diff_y2);
+				float acc;
 				if (gTouchX2 != -1) {
-					float diff_x = gTouchX2 - p->position.x;
-					float diff_y = gTouchY2 - p->position.y;
-					float acc = acceleration
-							/ (diff_x * diff_x + diff_y * diff_y);
-					float acc_x = acc * diff_x;
-					float acc_y = acc * diff_y;
+					if (sensitive) {
+						acc = p2 * 2 * acceleration / dist2;
+					} else {
+						acc = acceleration / dist2;
+					}
+					float acc_x = acc * diff_x2;
+					float acc_y = acc * diff_y2;
 
 					p->delta.x += acc_x;
 					p->delta.y += acc_y;
@@ -176,10 +206,30 @@ int root() {
 					p->delta.x *= delta;
 					p->delta.y *= delta;
 				}
-
+				
 				p->position.x += p->delta.x;
 				p->position.y += p->delta.y;
+				
+				
+				if (hotzones) {
+					float dist1color = (float) (dist) / 40000 + .1;
+					float dist2color = (float) (dist2) / 40000 + .1;
+					if (dist2 < 36000 && dist < 36000) {
+						c = rsPackColorTo8888(.7, greenRS, blueRS);
 
+						if (dist2color < .7)
+							c = rsPackColorTo8888(dist2color, greenRS, blueRS);
+						if (dist1color < .7 && dist2color > dist1color)
+							c = rsPackColorTo8888(dist1color, greenRS, blueRS);
+
+					} else if (dist2 < 36000) {
+						c = rsPackColorTo8888(dist2color, greenRS, blueRS);
+					} else if (dist < 36000) {
+						c = rsPackColorTo8888(dist1color, greenRS, blueRS);
+					} 
+//					else
+//						c = rsPackColorTo8888(1, greenRS, blueRS);
+				}
 				p->color = c;
 
 				if (p->position.x > width)
@@ -196,12 +246,21 @@ int root() {
 		}
 		// If no wrap
 		else {
+		//TODO Multiple-Bounce
+
 			for (int i = 0; i < size; i++) {
+				float diff_x = gTouchX1 - p->position.x;
+				float diff_y = gTouchY1 - p->position.y;
+				float dist = (diff_x * diff_x + diff_y * diff_y);
 				if (gTouchX1 != -1) {
-					float diff_x = gTouchX1 - p->position.x;
-					float diff_y = gTouchY1 - p->position.y;
-					float acc = acceleration
-							/ (diff_x * diff_x + diff_y * diff_y);
+					float acc;
+					if (sensitive) {
+						acc = p1*2*acceleration / dist;
+					} else {
+						acc = acceleration / dist;
+					}
+
+					
 					float acc_x = acc * diff_x;
 					float acc_y = acc * diff_y;
 
@@ -216,13 +275,18 @@ int root() {
 				p->position.x += p->delta.x;
 				p->position.y += p->delta.y;
 
+				float diff_x2 = gTouchX2 - p->position.x;
+				float diff_y2 = gTouchY2 - p->position.y;
+				float dist2 = (diff_x2 * diff_x2 + diff_y2 * diff_y2);
+				float acc;
 				if (gTouchX2 != -1) {
-					float diff_x = gTouchX2 - p->position.x;
-					float diff_y = gTouchY2 - p->position.y;
-					float acc = acceleration
-							/ (diff_x * diff_x + diff_y * diff_y);
-					float acc_x = acc * diff_x;
-					float acc_y = acc * diff_y;
+					if (sensitive) {
+						acc = p2 * 2 * acceleration / dist2;
+					} else {
+						acc = acceleration / dist2;
+					}
+					float acc_x = acc * diff_x2;
+					float acc_y = acc * diff_y2;
 
 					p->delta.x += acc_x;
 					p->delta.y += acc_y;
@@ -231,7 +295,27 @@ int root() {
 					p->delta.x *= delta;
 					p->delta.y *= delta;
 				}
+				
+				p->position.x += p->delta.x;
+				p->position.y += p->delta.y;
+				if (hotzones){
+					float dist1color = (float) (dist) / 40000 + .1;
+					float dist2color = (float) (dist2) / 40000 + .1;
+					if (dist2 < 36000 && dist < 36000) {
+						c = rsPackColorTo8888(.7, greenRS, blueRS);
 
+						if (dist2color < .7)
+							c = rsPackColorTo8888(dist2color, greenRS, blueRS);
+						if (dist1color < .7 && dist2color > dist1color)
+							c = rsPackColorTo8888(dist1color, greenRS, blueRS);
+
+					} else if (dist2 < 36000) {
+						c = rsPackColorTo8888(dist2color, greenRS, blueRS);
+					} else if (dist < 36000) {
+						c = rsPackColorTo8888(dist1color, greenRS, blueRS);
+					} else
+						c = rsPackColorTo8888(1, greenRS, blueRS);
+				}
 				p->color = c;
 
 //		Bounce
@@ -257,12 +341,20 @@ int root() {
 	} else {
 // If wrap true
 		if (wrap) {
+		//Single Wrap	
+		
 			for (int i = 0; i < size; i++) {
+				float diff_x = gTouchX1 - p->position.x;
+				float diff_y = gTouchY1 - p->position.y;
+				float dist = (diff_x * diff_x + diff_y * diff_y);
 				if (gTouchX1 != -1) {
-					float diff_x = gTouchX1 - p->position.x;
-					float diff_y = gTouchY1 - p->position.y;
-					float acc = acceleration
-							/ (diff_x * diff_x + diff_y * diff_y);
+					float acc;
+					if (sensitive) {
+						acc = p1*2*acceleration / dist;
+					} else {
+						acc = acceleration / dist;
+					}
+//					rsDebug("acc", acc);
 					float acc_x = acc * diff_x;
 					float acc_y = acc * diff_y;
 
@@ -276,7 +368,14 @@ int root() {
 
 				p->position.x += p->delta.x;
 				p->position.y += p->delta.y;
-
+				if (hotzones) {
+					c = rsPackColorTo8888(1, greenRS, blueRS);
+					if (dist < 36000 && gTouchX1 != -1) {
+						c = rsPackColorTo8888((float) (dist) / 40000 + .1,
+								greenRS, blueRS);
+					}
+				}
+				
 				p->color = c;
 
 				if (p->position.x > width) {
@@ -313,12 +412,24 @@ int root() {
 		}
 		// If no wrap
 		else {
+		//Single Bounce
+			float acc;
+			float accel = p1 * 2.f * (float) acceleration;
+			float diff_x;
+			float diff_y;
+			float dist;
 			for (int i = 0; i < size; i++) {
+
 				if (gTouchX1 != -1) {
-					float diff_x = gTouchX1 - p->position.x;
-					float diff_y = gTouchY1 - p->position.y;
-					float acc = acceleration
-							/ (diff_x * diff_x + diff_y * diff_y);
+					diff_x = gTouchX1 - p->position.x;
+					diff_y = gTouchY1 - p->position.y;
+					dist = (diff_x * diff_x + diff_y * diff_y);
+					float acc;
+					if (sensitive) {
+						acc = accel / (diff_x * diff_x + diff_y * diff_y);
+					} else {
+						acc = acceleration / (diff_x * diff_x + diff_y * diff_y);
+					}
 					float acc_x = acc * diff_x;
 					float acc_y = acc * diff_y;
 
@@ -328,11 +439,21 @@ int root() {
 					// This is friction
 					p->delta.x *= delta;
 					p->delta.y *= delta;
+
 				}
 
 				p->position.x += p->delta.x;
 				p->position.y += p->delta.y;
-
+//				rsDebug("delta", (float)dist/10000);
+				
+				if (hotzones) {
+					c = rsPackColorTo8888(1, greenRS, blueRS);
+					if (dist < 36000 && gTouchX1 != -1) {
+						c = rsPackColorTo8888((float) (dist) / 40000 + .1,
+								greenRS, blueRS);
+					}
+				}
+//					c = rsPackColorTo8888(redRS, greenRS, blueRS);
 				p->color = c;
 
 //		Bounce
@@ -370,16 +491,14 @@ int root() {
 				}
 				p++;
 				
-
 			}
+
 		}
 	
 	}
-	
 	rsgDrawMesh(partMesh);
-	frame2 = rsUptimeMillis();
-	rsDebug("FPS:", (1000/(frame2-frame1)));
-	frame1 = rsUptimeMillis();
-
+	t1 = rsUptimeMillis();
+	rsDebug("time", 1000/(t1-t2));
+	t2 = rsUptimeMillis();
 	return 1;
 }
