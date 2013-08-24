@@ -28,8 +28,8 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		mView = new GravityView(this, partCount);
 		setContentView(mView);
 		
@@ -64,9 +64,11 @@ public class MainActivity extends Activity {
 		// Runtime.getRuntime().exit(0);
 	}
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onPrepareOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+//		getMenuInflater().inflate(R.menu.main, menu);
+		Intent intent = new Intent(this, Settings.class);
+		startActivityForResult(intent, 1);
 		return true;
 	}
 	

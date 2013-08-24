@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.renderscript.RSSurfaceView;
 import android.renderscript.RenderScriptGL;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -59,7 +58,7 @@ public class GravityView extends RSSurfaceView {
           // We have a new pointer. Lets add it to the list of pointers
         	if (ev.getPointerCount() == 3) {
  			   Intent intent = new Intent(getContext(), Settings.class);
- 			   MainActivity.instance.startActivity(intent);
+ 				MainActivity.instance.startActivityForResult(intent, 1);
  			   break;
         	} else if(ev.getPointerCount() == 2) {
         		mRender.newTouchPosition2(ev.getX(1), ev.getY(1), ev.getPressure(1)); 
@@ -75,6 +74,7 @@ public class GravityView extends RSSurfaceView {
         case MotionEvent.ACTION_MOVE: {
         	if(ev.getPointerCount() == 2) {
             mRender.newTouchPosition2(ev.getX(1), ev.getY(1), ev.getPressure(1)); 
+            mRender.newTouchPosition(ev.getX(0), ev.getY(0), ev.getPressure(0));        
             mRender.multiple = true;
         	}
         	else {
