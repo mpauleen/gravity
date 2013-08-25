@@ -40,7 +40,7 @@ public class ColorChooserDialog extends Activity {
 		MainActivity.g = g;
 		MainActivity.b = b;
 		
-		SeekBar red = (SeekBar) findViewById(R.id.redBar);
+		final SeekBar red = (SeekBar) findViewById(R.id.redBar);
 		red.setMax(255);
 		red.setProgress(MainActivity.r);
 		red.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -49,10 +49,6 @@ public class ColorChooserDialog extends Activity {
 				Toast.makeText(getApplicationContext(),
 						"red bar progress:" + r, Toast.LENGTH_SHORT).show();
 
-//				
-//				MainActivity.r = r;
-//				MainActivity.g = g;
-//				MainActivity.b = b;
 			}
 
 			@Override
@@ -154,21 +150,17 @@ public class ColorChooserDialog extends Activity {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(isChecked)
+				if(isChecked) {
 					MainActivity.hotzones = true;
-				 else
+					red.setEnabled(false);
+				}
+				 else {
 					MainActivity.hotzones = false;
+					red.setEnabled(true);
+				 }
 				
 			}
 		});
-
-
-		// dialogButton.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// dialog.dismiss();
-		// }
-		// });
 
 		Button colorReset = (Button) findViewById(R.id.resetColor);
 		
@@ -209,10 +201,10 @@ public class ColorChooserDialog extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		final MySurfaceView s = (MySurfaceView) findViewById(R.id.mySurfaceView1);
-		s.setColors(r, g, b);
-		s.postInvalidate();
-		s.draw(new Canvas());
+//		final MySurfaceView s = (MySurfaceView) findViewById(R.id.mySurfaceView1);
+//		s.setColors(r, g, b);
+//		s.postInvalidate();
+//		s.draw(new Canvas());
 
 		MainActivity.r = r;
 		MainActivity.g = g;

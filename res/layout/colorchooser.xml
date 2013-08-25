@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -7,115 +8,122 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <SeekBar
-        android:id="@+id/redBar"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/greenBar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:scrollbars="vertical"
+        tools:context=".ColorChooserDialog" >
 
-    <SeekBar
-        android:id="@+id/greenBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/redBar"
-        android:layout_toRightOf="@+id/textView2" />
+        <SeekBar
+            android:id="@+id/redBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/greenBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/greenBar"
-        android:layout_alignParentLeft="true"
-        android:text="Green  "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <SeekBar
+            android:id="@+id/greenBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/redBar"
+            android:layout_toRightOf="@+id/textView2" />
 
-    <SeekBar
-        android:id="@+id/blueBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/greenBar"
-        android:layout_below="@+id/greenBar" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/greenBar"
+            android:layout_alignParentLeft="true"
+            android:text="Green  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/blueBar"
-        android:layout_alignParentLeft="true"
-        android:text="Blue  "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <SeekBar
+            android:id="@+id/blueBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/greenBar"
+            android:layout_below="@+id/greenBar" />
 
-    <TextView
-        android:id="@+id/partNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/greenBar"
-        android:layout_alignParentLeft="true"
-        android:text="Red  "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/blueBar"
+            android:layout_alignParentLeft="true"
+            android:text="Blue  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <com.example.gravity.MySurfaceView
-        android:id="@+id/mySurfaceView1"
-        android:layout_width="50px"
-        android:layout_height="50px"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/blueBar"
-        android:layout_marginRight="19dp"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        <TextView
+            android:id="@+id/partNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/greenBar"
+            android:layout_alignParentLeft="true"
+            android:text="Red  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
-        android:layout_alignParentLeft="true"
-        android:text="Background  "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <com.example.gravity.MySurfaceView
+            android:id="@+id/mySurfaceView1"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/blueBar"
+            android:layout_marginRight="19dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/mySurfaceView1" />
+        <TextView
+            android:id="@+id/background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView1"
+            android:layout_alignParentLeft="true"
+            android:text="Background  "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ToggleButton
-        android:id="@+id/toggleBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/background"
-        android:layout_alignBottom="@+id/background"
-        android:layout_toRightOf="@+id/background"
-        android:text="ToggleButton"
-        android:textOff="White"
-        android:textOn="Black" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/mySurfaceView1" />
 
-    <CheckBox
-        android:id="@+id/hotzoneCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:text="Enable Hotzones" />
+        <ToggleButton
+            android:id="@+id/toggleBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/background"
+            android:layout_alignBottom="@+id/background"
+            android:layout_toRightOf="@+id/background"
+            android:text="ToggleButton"
+            android:textOff="White"
+            android:textOn="Black" />
 
-    <Button
-        android:id="@+id/resetColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/saveColorDef"
-        android:layout_alignBottom="@+id/saveColorDef"
-        android:layout_alignParentLeft="true"
-        android:text="Reset" />
+        <CheckBox
+            android:id="@+id/hotzoneCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:text="Enable Heatmap" />
 
-    <Button
-        android:id="@+id/saveColorDef"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/resetColor"
-        android:layout_below="@+id/hotzoneCheck"
-        android:text="Save Defaults" />
+        <Button
+            android:id="@+id/resetColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/saveColorDef"
+            android:layout_alignBottom="@+id/saveColorDef"
+            android:layout_alignParentLeft="true"
+            android:text="Restore" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/saveColorDef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotzoneCheck"
+            android:layout_toRightOf="@+id/resetColor"
+            android:text="Set Defaults" />
+    </RelativeLayout>
+
+</ScrollView>

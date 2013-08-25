@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/resetGravity"
-            android:text="Save Defaults" />
+            android:text="Set Defaults" />
 
     </RelativeLayout>
 

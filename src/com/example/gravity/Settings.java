@@ -19,7 +19,7 @@ import android.widget.ListView;
 
 public class Settings extends ListActivity {
 
-	static final String[] FRUITS = new String[] { "Pick Color", "Set Number of Particles", "Set Gravity", "Fullscreen", "Reset"};
+	static final String[] FRUITS = new String[] { "Pick Color", "Set Number of Particles", "Set Gravity", "Fullscreen", "Reset Default Settings"};
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +121,7 @@ public void onCreate(Bundle savedInstanceState) {
 					      SharedPreferences.Editor editor = settings.edit();
 					      editor.clear();
 					      editor.commit();
-					      MainActivity.resetAll();
+					      resetAll();
 					      
 			       }})
 			    .setNegativeButton(android.R.string.no, null).show();
@@ -131,5 +131,25 @@ public void onCreate(Bundle savedInstanceState) {
 	});
 
 }
+	private void resetAll() {
+		SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.clear();
+		editor.commit();
+	    MainActivity.r = 128;
+		MainActivity.g = 230;
+		MainActivity.b = 230;
+		MainActivity.partCount = 20000;
+		MainActivity.delta = 0.96f;
+		MainActivity.acc = 100.f;
+		MainActivity.wrap = false;
+		MainActivity.black = true;
+		MainActivity.persist = true;
+		MainActivity.sensitive = false;
+		MainActivity.hotzones = false;
+		MainActivity.fullCheck = false;
+		MainActivity.dontAlert = false;
+		
 
+	}
 }

@@ -255,8 +255,8 @@ int root() {
 					} else if (dist < 36000) {
 						c = rsPackColorTo8888(dist1color, greenRS, blueRS);
 					} 
-//					else
-//						c = rsPackColorTo8888(1, greenRS, blueRS);
+					else
+						c = rsPackColorTo8888(1, greenRS, blueRS);
 				}
 				p->color = c;
 

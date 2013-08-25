@@ -127,11 +127,7 @@ public class MainActivity extends Activity {
 	}
 	
 
-	public static void resetAll() {
-		instance.mView = new GravityView(instance, partCount);
-		instance.setContentView(instance.mView);
-	}
-	
+
 	private void saveColorSet() {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
