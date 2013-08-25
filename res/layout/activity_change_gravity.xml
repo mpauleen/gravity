@@ -75,7 +75,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/persistToggle"
-            android:text="Reset" />
+            android:text="Restore" />
+
+        <Button
+            android:id="@+id/saveDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/resetGravity"
+            android:text="Save Defaults" />
 
     </RelativeLayout>
 

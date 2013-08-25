@@ -101,4 +101,21 @@
         android:layout_below="@+id/textView1"
         android:text="Enable Hotzones" />
 
+    <Button
+        android:id="@+id/resetColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/saveColorDef"
+        android:layout_alignBottom="@+id/saveColorDef"
+        android:layout_alignParentLeft="true"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/saveColorDef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/resetColor"
+        android:layout_below="@+id/hotzoneCheck"
+        android:text="Save Defaults" />
+
 </RelativeLayout>

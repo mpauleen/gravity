@@ -24,4 +24,22 @@
         android:text="40000"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <Button
+        android:id="@+id/setPartDef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/restorePartDef"
+        android:layout_alignBottom="@+id/restorePartDef"
+        android:layout_toRightOf="@+id/restorePartDef"
+        android:text="Set Default" />
+
+    <Button
+        android:id="@+id/restorePartDef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/particleNum"
+        android:layout_below="@+id/partNum"
+        android:layout_marginTop="15dp"
+        android:text="Restore" />
+
 </RelativeLayout>

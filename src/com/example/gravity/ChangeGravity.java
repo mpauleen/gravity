@@ -2,6 +2,7 @@ package com.example.gravity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -37,6 +38,7 @@ public class ChangeGravity extends Activity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				acc = (float) (seekBar.getProgress()+10);
+				MainActivity.acc = acc;
 				
 			}
 			
@@ -62,6 +64,7 @@ public class ChangeGravity extends Activity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				deltaNum = (50 +(float) seekBar.getProgress())/100;
+				MainActivity.delta = deltaNum;
 			}
 			
 			@Override
@@ -133,9 +136,13 @@ public class ChangeGravity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				MainActivity.wrap = false;
-				MainActivity.delta = 0.96f;
-				MainActivity.acc = 100.f;
+				SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+				
+				MainActivity.delta = settings.getFloat("defDel", 0.96f);
+				MainActivity.acc = settings.getFloat("defAcc", 100.f);
+				MainActivity.wrap = settings.getBoolean("defWrap", false);
+				MainActivity.sensitive = settings.getBoolean("defSen", false);
+				MainActivity.persist = settings.getBoolean("defPer", true);
 				Intent intent = new Intent(getApplicationContext(),ChangeGravity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(intent);
@@ -143,6 +150,31 @@ public class ChangeGravity extends Activity {
 				
 			}
 		});
+
+		Button saveDefaults = (Button) findViewById(R.id.saveDefault);
+		
+		saveDefaults.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				saveGravitySet();
+				finish();
+			}
+		});
+		
+		
+	}
+	
+	private void saveGravitySet() {
+		SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putFloat("defDel", MainActivity.delta);
+		editor.putFloat("defAcc", MainActivity.acc);
+		editor.putBoolean("defWrap", MainActivity.wrap);
+		editor.putBoolean("defSen", MainActivity.sensitive);
+		editor.putBoolean("defPer", MainActivity.persist);
+		editor.commit();
+
 	}
 
 	@Override

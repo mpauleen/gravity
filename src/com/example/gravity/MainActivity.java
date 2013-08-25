@@ -3,14 +3,30 @@ package com.example.gravity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
-	public static int r = 128;
+	
+    public static final String PREFS_NAME = "MyPrefsFile";
+	
+    //Default Variables
+    static int defR = 128;
+    static int defG = 230;
+    static int defB = 230;
+    static boolean defHZ = false;
+    static boolean defBG = true;
+    static int defNum = 20000;
+    static float defDel = 0.96f;
+    static float defAcc = 100.f;
+    static boolean defWrap = false;
+    static boolean defSen = false;
+    static boolean defPer = true;
+
+    public static int r = 128;
 	public static int g = 230;
 	public static int b = 230;
 	public static int partCount = 20000;
@@ -21,19 +37,28 @@ public class MainActivity extends Activity {
 	public static boolean persist = true;
 	public static boolean sensitive = false;
 	public static boolean hotzones = false;
-	static MainActivity instance;
+	public static boolean fullCheck = false;
+	public static boolean dontAlert = false;
 	
+	static MainActivity instance;
+
 	private GravityView mView;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		
 		mView = new GravityView(this, partCount);
 		setContentView(mView);
-		
 		instance = this;
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		dontAlert = settings.getBoolean("dontAlert", false);
+		delta = settings.getFloat("defDel", 0.96f);
+		acc = settings.getFloat("defAcc", 100.f);
+		wrap = settings.getBoolean("defWrap", false);
+		persist = settings.getBoolean("defPer", true);
+		sensitive = settings.getBoolean("defSen", false);
 	}
 	
 	public static void notifyPartCountChanged() {
@@ -47,9 +72,11 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		// Ideally a game should implement onResume() and onPause()
-		// to take appropriate action when the activity looses focus
 		super.onResume();
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		MainActivity.dontAlert = settings.getBoolean("dontAlert", false);
+		System.out.println("Resume: "+MainActivity.dontAlert);
+
 		mView.resume();
 		
 	}
@@ -58,17 +85,18 @@ public class MainActivity extends Activity {
 	protected void onPause() {
 		// Ideally a game should implement onResume() and onPause()
 		// to take appropriate action when the activity looses focus
-		super.onPause();
+		super.onPause();	
 		mView.pause();
-
-		// Runtime.getRuntime().exit(0);
 	}
+	
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
-		Intent intent = new Intent(this, Settings.class);
-		startActivityForResult(intent, 1);
+	protected void onStop() {
+		super.onStop();
+	}
+//	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
@@ -86,7 +114,7 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
+
 		System.out.println(requestCode);
 		if(requestCode == 1) {
 			mView.mRender.setColor(r, g, b, black, hotzones);
@@ -95,32 +123,51 @@ public class MainActivity extends Activity {
 	}
 	
 	public static void resetParticle() {
-		partCount = 40000;
+		partCount = defNum;
 	}
 	
-	public static void resetGravity(){
-		acc = 100f;
-		delta = 0.96f;
-		wrap = false;
-		persist = true;
-		sensitive = false;
-		
-	}
-	
-	public static void resetColor() {
-		r = 128;
-		g = 230;
-		b = 230;
-		hotzones = false;
-	}
-	
+
 	public static void resetAll() {
-		resetColor();
-		resetGravity();
-		resetParticle();
 		instance.mView = new GravityView(instance, partCount);
 		instance.setContentView(instance.mView);
 	}
 	
+	private void saveColorSet() {
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+	      editor.putInt("defR", defR);
+	      editor.putInt("defG", defG);
+	      editor.putInt("defB", defB);
+	      editor.putBoolean("defHZ", defHZ);
+	      editor.putBoolean("defBG", defBG);
+      editor.commit();
+	}
+	
+	private void saveGravitySet() {
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putFloat("defDel", defDel);
+		editor.putFloat("defAcc", defAcc);
+		editor.putBoolean("defWrap", defWrap);
+		editor.putBoolean("defSen", defSen);
+		editor.putBoolean("defPer", defPer);
+		editor.commit();
+
+	}
+	
+	private void savePartNum() {
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt("defNum", defNum);
+		editor.commit();
+
+	}
+	
+	public void saveAll() {
+		saveColorSet();
+		saveGravitySet();
+		savePartNum();
+	}
+		
 	
 }

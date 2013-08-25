@@ -26,26 +26,32 @@ public final class R {
     }
     public static final class id {
         public static final int accBar=0x7f090003;
-        public static final int action_settings=0x7f090015;
-        public static final int background=0x7f090011;
-        public static final int blueBar=0x7f09000e;
+        public static final int action_settings=0x7f09001b;
+        public static final int background=0x7f090014;
+        public static final int blueBar=0x7f090011;
         public static final int changeAcc=0x7f090001;
         public static final int changeDelta=0x7f090000;
         public static final int deltaBar=0x7f090002;
-        public static final int gravityView1=0x7f090008;
-        public static final int greenBar=0x7f09000c;
-        public static final int hotzoneCheck=0x7f090014;
-        public static final int mySurfaceView1=0x7f090010;
-        public static final int partNum=0x7f09000a;
-        public static final int particleNum=0x7f090009;
+        public static final int fullBox=0x7f09001a;
+        public static final int gravityView1=0x7f090009;
+        public static final int greenBar=0x7f09000f;
+        public static final int hotzoneCheck=0x7f090017;
+        public static final int mySurfaceView1=0x7f090013;
+        public static final int partNum=0x7f09000b;
+        public static final int particleNum=0x7f09000a;
         public static final int persistToggle=0x7f090006;
-        public static final int redBar=0x7f09000b;
+        public static final int redBar=0x7f09000e;
+        public static final int resetColor=0x7f090018;
         public static final int resetGravity=0x7f090007;
+        public static final int restorePartDef=0x7f09000d;
+        public static final int saveColorDef=0x7f090019;
+        public static final int saveDefault=0x7f090008;
         public static final int sensitiveToggle=0x7f090005;
-        public static final int textView1=0x7f090012;
-        public static final int textView2=0x7f09000d;
-        public static final int textView3=0x7f09000f;
-        public static final int toggleBackground=0x7f090013;
+        public static final int setPartDef=0x7f09000c;
+        public static final int textView1=0x7f090015;
+        public static final int textView2=0x7f090010;
+        public static final int textView3=0x7f090012;
+        public static final int toggleBackground=0x7f090016;
         public static final int wrapButton=0x7f090004;
     }
     public static final class layout {
@@ -54,6 +60,7 @@ public final class R {
         public static final int activity_particle_number_setter=0x7f030002;
         public static final int activity_settings=0x7f030003;
         public static final int colorchooser=0x7f030004;
+        public static final int fullscreen_box=0x7f030005;
     }
     public static final class menu {
         public static final int change_gravity=0x7f080000;

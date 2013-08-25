@@ -1,8 +1,13 @@
 package com.example.gravity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -53,9 +58,44 @@ public class ParticleNumberSetter extends Activity {
 
 			}
 		});
+		
+		Button partNumReset = (Button) findViewById(R.id.restorePartDef);
+		
+		partNumReset.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+				
+				MainActivity.partCount = settings.getInt("defPartNum", 20000);
+				Intent intent = new Intent(getApplicationContext(),ParticleNumberSetter.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				startActivity(intent);
+				finish();
+				
+			}
+		});
+
+		Button saveDefaults = (Button) findViewById(R.id.setPartDef);
+		
+		saveDefaults.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				savePartNum();
+				finish();
+			}
+		});
 
 	}
 
+	private void savePartNum(){
+		SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt("defPartNum", progress);
+		editor.commit();
+
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

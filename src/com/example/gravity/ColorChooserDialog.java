@@ -2,9 +2,11 @@ package com.example.gravity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -168,6 +170,39 @@ public class ColorChooserDialog extends Activity {
 		// }
 		// });
 
+		Button colorReset = (Button) findViewById(R.id.resetColor);
+		
+		colorReset.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+				
+				MainActivity.r = settings.getInt("defR", 128);
+				MainActivity.g = settings.getInt("defG", 230);
+				MainActivity.b = settings.getInt("defB", 230);
+				MainActivity.black = settings.getBoolean("defBG", true);
+				MainActivity.hotzones = settings.getBoolean("defHZ", false);
+				Intent intent = new Intent(getApplicationContext(),ColorChooserDialog.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				startActivity(intent);
+				finish();
+				
+			}
+		});
+
+		Button saveDefaults = (Button) findViewById(R.id.saveColorDef);
+		
+		saveDefaults.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				saveColorSet();
+				finish();
+			}
+		});
+
+	
 	}
 	
 	@Override
@@ -184,5 +219,18 @@ public class ColorChooserDialog extends Activity {
 		MainActivity.b = b;
 		finish();
 	}
+	
+	private void saveColorSet() {
+		SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt("defR", r);
+		editor.putInt("defG", g);
+		editor.putInt("defB", b);
+		editor.putBoolean("defBG", MainActivity.black);
+		editor.putBoolean("defHZ", MainActivity.hotzones);
+		editor.commit();
+
+	}
+
 
 }

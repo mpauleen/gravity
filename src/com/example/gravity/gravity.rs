@@ -525,8 +525,8 @@ int root() {
 	
 	}
 	rsgDrawMesh(partMesh);
-	t1 = rsUptimeMillis();
-	rsDebug("time", 1000/(t1-t2));
-	t2 = rsUptimeMillis();
+//	t1 = rsUptimeMillis();
+//	rsDebug("time", 1000/(t1-t2));
+//	t2 = rsUptimeMillis();
 	return 1;
 }
