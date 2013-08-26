@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Delta "
+            android:text="Slipperiness "
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/changeDelta"
-            android:text="Acc."
+            android:text="Acceleration"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <SeekBar

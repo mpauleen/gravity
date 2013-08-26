@@ -19,7 +19,7 @@ import android.widget.ListView;
 
 public class Settings extends ListActivity {
 
-	static final String[] FRUITS = new String[] { "Pick Color", "Set Number of Particles", "Set Gravity", "Fullscreen", "Reset Default Settings"};
+	static final String[] FRUITS = new String[] { "Set Color", "Set Number of Particles", "Set Gravity", "Fullscreen", "Reset Default Settings"};
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public void onCreate(Bundle savedInstanceState) {
 				   if (!MainActivity.dontAlert) {
 				   new AlertDialog.Builder(Settings.this)
 				   .setTitle("Fullscreen")
-				   .setMessage("You can access the settings menu in fullscreen mode with a three-finger press.")
+				   .setMessage("Access the settings menu in fullscreen mode with a three-finger press.")
 				   .setIcon(android.R.drawable.ic_dialog_info)
 				   .setView(checkBoxView)
 				   .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
